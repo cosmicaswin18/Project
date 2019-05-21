@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Simple Page</title>
+        <link rel="stylesheet" href="login.css">
+    </head>
+    <body>
+        <h1 class="mainheading">Login</h1>
+        <div class="centerForm">
+        <form  name = "myform" action="Welcome.html" method="POST">
+            <div class="imgcontainer">
+              <img src="Avatar2.jpg" alt="Avatar" class="avatar">
+            </div>
+          
+            <div class="container">
+              <label for="uname"><b style="color:aqua;">Username</b></label>
+              <input type="text" placeholder="Enter Username" name="uname" required>
+          
+              <label for="psw"><b style="color:aqua;">Password</b></label>
+              <input type="password" placeholder="Enter Password" name="psw" required>
+          
+              <button type="submit">Login</button>
+              <label>
+                <input type="checkbox" checked="checked" name="remember"> <u style="color:aqua;">Remember me</u> 
+                </label> 
+            </div>
+          
+            <div class="container" style="background-color:#383333">
+              <button type="button" class="cancelbtn">Cancel</button>
+              <span class="psw">Forgot <a href="#">password?</a></span>
+            </div>
+          </form>
+     </div>   
+    </body>
+</html>
