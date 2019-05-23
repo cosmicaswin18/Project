@@ -13,8 +13,28 @@
         <servlet-class>Validate</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>Welcome</servlet-name>
-        <servlet-class>Welcome</servlet-class>
+        <servlet-name>Add</servlet-name>
+        <servlet-class>Add</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Delete</servlet-name>
+        <servlet-class>Delete</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Display</servlet-name>
+        <servlet-class>Display</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Edit</servlet-name>
+        <servlet-class>Edit</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Buy</servlet-name>
+        <servlet-class>Buy</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Bill</servlet-name>
+        <servlet-class>Bill</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Register</servlet-name>
@@ -29,8 +49,28 @@
         <url-pattern>/Validate</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>Welcome</servlet-name>
-        <url-pattern>/Welcome</url-pattern>
+        <servlet-name>Add</servlet-name>
+        <url-pattern>/Add</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Delete</servlet-name>
+        <url-pattern>/Delete</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Display</servlet-name>
+        <url-pattern>/Display</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Edit</servlet-name>
+        <url-pattern>/Edit</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Buy</servlet-name>
+        <url-pattern>/Buy</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Bill</servlet-name>
+        <url-pattern>/Bill</url-pattern>
     </servlet-mapping>
     <welcome-file-list>
         <welcome-file>index.html</welcome-file>
