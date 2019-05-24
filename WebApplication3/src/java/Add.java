@@ -16,11 +16,11 @@ public class Add extends HttpServlet {
         int qty = Integer.parseInt(request.getParameter("qty"));
         float pr = Float.valueOf(request.getParameter("price"));
         try {
-
-            Class.forName("org.apache.derby.jdbc.ClientDriver");
-
-            Connection con;
-            con = DriverManager.getConnection("jdbc:derby://localhost:1527/User", "root", "root");
+            Connection con = DBManager.getConnection();
+//            Class.forName("org.apache.derby.jdbc.ClientDriver");
+//            
+//            Connection con;
+//            con = DriverManager.getConnection("jdbc:derby://localhost:1527/User", "root", "root");
 
             PreparedStatement ps = con.prepareStatement("insert into stock values(?,?,?,?)");
 
@@ -32,10 +32,12 @@ public class Add extends HttpServlet {
 
             if (i > 0) {
                 out.println("Item sucessfully added");
+                RequestDispatcher rd = request.getRequestDispatcher("stock.html");
+                rd.include(request, response);
 
             }
 
-        } catch (ClassNotFoundException | SQLException se) {
+        } catch (SQLException se) {
         }
 
     }

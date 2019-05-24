@@ -12,7 +12,7 @@ public class Buy extends HttpServlet {
         PrintWriter out = response.getWriter();
 
         int cid = Integer.parseInt(request.getParameter("CUSTID"));
-        String name = request.getParameter("CUSTNAME");
+        int bid = Integer.parseInt(request.getParameter("BILLID"));
         int pid = Integer.parseInt(request.getParameter("OPID"));
         int pqty = Integer.parseInt(request.getParameter("PQTY"));
         String pname = null;
@@ -20,10 +20,11 @@ public class Buy extends HttpServlet {
         int qty = 0, fq;
         try {
 
-            Class.forName("org.apache.derby.jdbc.ClientDriver");
-
-            Connection con;
-            con = DriverManager.getConnection("jdbc:derby://localhost:1527/User", "root", "root");
+            Connection con = DBManager.getConnection();
+//            Class.forName("org.apache.derby.jdbc.ClientDriver");
+//
+//            Connection con;
+//            con = DriverManager.getConnection("jdbc:derby://localhost:1527/User", "root", "root");
 
             PreparedStatement ps = con.prepareStatement("select * from stock where id=?");
 
@@ -48,7 +49,7 @@ public class Buy extends HttpServlet {
 
             PreparedStatement ps1 = con.prepareStatement("insert into buy values(?,?,?,?,?,?)");
             ps1.setInt(1, cid);
-            ps1.setString(2, name);
+            ps1.setInt(2, bid);
             ps1.setInt(3, pid);
             ps1.setString(4, pname);
             ps1.setInt(5, pqty);
@@ -62,14 +63,14 @@ public class Buy extends HttpServlet {
 //                rs.include(request, response);
             }
 
-            PreparedStatement ps3 = con.prepareStatement("update stock set id=?,iname=?,qty=?,price=? where id=?");
+            PreparedStatement ps2 = con.prepareStatement("update stock set id=?,iname=?,qty=?,price=? where id=?");
 //            out.println("sdfglkjhgjkjh");
-            ps3.setInt(1, pid);
-            ps3.setString(2, pname);
-            ps3.setInt(3, fq);
-            ps3.setFloat(4, price);
-            ps3.setInt(5, pid);
-            int j = ps3.executeUpdate();
+            ps2.setInt(1, pid);
+            ps2.setString(2, pname);
+            ps2.setInt(3, fq);
+            ps2.setFloat(4, price);
+            ps2.setInt(5, pid);
+            int j = ps2.executeUpdate();
 
             if (j > 0) {
                 out.println("Database Updated Successfully");
@@ -77,7 +78,7 @@ public class Buy extends HttpServlet {
                 rd.include(request, response);
             }
 
-        } catch (ClassNotFoundException | SQLException se) {
+        } catch (SQLException se) {
         }
 
     }

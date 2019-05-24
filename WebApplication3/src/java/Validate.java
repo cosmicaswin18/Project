@@ -11,18 +11,18 @@ public class Validate
      {
       boolean st =false;
       try{
-
-         Class.forName("org.apache.derby.jdbc.ClientDriver");
-
-         Connection con;
-          con = DriverManager.getConnection("jdbc:derby://localhost:1527/User","root","root");
+          Connection con = DBManager.getConnection();
+//         Class.forName("org.apache.derby.jdbc.ClientDriver");
+//
+//         Connection con;
+//          con = DriverManager.getConnection("jdbc:derby://localhost:1527/User","root","root");
          PreparedStatement ps =con.prepareStatement("select * from Login where uname=? and pass=?");
          ps.setString(1, uname);
          ps.setString(2, pass);
          ResultSet rs =ps.executeQuery();
          st = rs.next();
         
-      }catch(ClassNotFoundException | SQLException e)
+      }catch(SQLException e)
       {
       }
          return st;                 

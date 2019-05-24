@@ -12,27 +12,28 @@ public class Delete extends HttpServlet {
         PrintWriter out = response.getWriter();
 
         int id = Integer.parseInt(request.getParameter("id"));
-        String name = request.getParameter("name");
+        //String name = request.getParameter("name");
         try {
-
-            Class.forName("org.apache.derby.jdbc.ClientDriver");
-
-            Connection con;
-            con = DriverManager.getConnection("jdbc:derby://localhost:1527/User", "root", "root");
+            Connection con = DBManager.getConnection();
+//            Class.forName("org.apache.derby.jdbc.ClientDriver");
+//
+//            Connection con;
+//            con = DriverManager.getConnection("jdbc:derby://localhost:1527/User", "root", "root");
 
             PreparedStatement ps = con.prepareStatement("delete from stock where id=?");
 
             ps.setInt(1, id);
-            
-            
+
             int i = ps.executeUpdate();
 
             if (i != 0) {
-                out.println("Sucessfully Deleted Item: "+ name);
+                out.println("Sucessfully Deleted Item");
+                RequestDispatcher rd = request.getRequestDispatcher("stock.html");
+                rd.include(request, response);
 
             }
 
-        } catch (ClassNotFoundException | SQLException se) {
+        } catch (SQLException se) {
         }
 
     }
