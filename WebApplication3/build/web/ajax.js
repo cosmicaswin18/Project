@@ -31,7 +31,7 @@ function ajaxFunction(){
                }
             };
             var id = document.getElementById("b").value;
-            var queryString ="?id = "+id;
-            ajaxRequest.open("GET","billdetails.jsp"+queryString,true);
-            ajaxRequest.send(null);
+            //var queryString ="?id =200 ";
+            ajaxRequest.open("GET","billdetails.jsp"+id,true);
+            ajaxRequest.send();
 }
