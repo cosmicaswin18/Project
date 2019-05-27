@@ -22,9 +22,11 @@ ResultSet resultSet;
 try{
 int id=Integer.parseInt(request.getParameter("id"));
 //int id = 200;
+//String id = request.getParameter("id");
 connection = DriverManager.getConnection(connectionUrl+database, userid, password);
 //Connection connection = DBManager.getConnection();
 statement=connection.prepareStatement("select * from buy where billid=?");
+//statement.setString(1, id);
 statement.setInt(1, id);
 //String sql ="select * from buy where billid=200";
 resultSet = statement.executeQuery();
@@ -38,6 +40,6 @@ i++;
 connection.close();
 } catch (Exception e) {
 e.printStackTrace();
-//out.print("dfghj"+e);
+out.print("dfghj"+e);
 }
 %>

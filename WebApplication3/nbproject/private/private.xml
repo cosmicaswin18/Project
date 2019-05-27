@@ -6,22 +6,29 @@
             <file>file:/Users/test/NetBeansProjects/WebApplication3/src/java/Login.java</file>
             <file>file:/Users/test/NetBeansProjects/WebApplication3/web/stock.html</file>
             <file>file:/Users/test/NetBeansProjects/WebApplication3/web/edit.html</file>
-            <file>file:/Users/test/NetBeansProjects/WebApplication3/src/java/Display.java</file>
-            <file>file:/Users/test/NetBeansProjects/WebApplication3/web/WEB-INF/web.xml</file>
             <file>file:/Users/test/NetBeansProjects/WebApplication3/web/bill.html</file>
-            <file>file:/Users/test/NetBeansProjects/WebApplication3/web/delete.html</file>
             <file>file:/Users/test/NetBeansProjects/WebApplication3/src/java/Delete.java</file>
+            <file>file:/Users/test/NetBeansProjects/WebApplication3/src/java/Details.java</file>
             <file>file:/Users/test/NetBeansProjects/WebApplication3/web/index.html</file>
+            <file>file:/Users/test/NetBeansProjects/WebApplication3/src/java/BillHistory.java</file>
+            <file>file:/Users/test/NetBeansProjects/WebApplication3/web/details.html</file>
             <file>file:/Users/test/NetBeansProjects/WebApplication3/web/register.html</file>
             <file>file:/Users/test/NetBeansProjects/WebApplication3/src/java/Edit.java</file>
-            <file>file:/Users/test/NetBeansProjects/WebApplication3/src/java/Register.java</file>
-            <file>file:/Users/test/NetBeansProjects/WebApplication3/web/buy.html</file>
             <file>file:/Users/test/NetBeansProjects/WebApplication3/web/display.html</file>
             <file>file:/Users/test/NetBeansProjects/WebApplication3/src/java/Add.java</file>
             <file>file:/Users/test/NetBeansProjects/WebApplication3/src/java/Bill.java</file>
+            <file>file:/Users/test/NetBeansProjects/WebApplication3/src/java/Buy.java</file>
+            <file>file:/Users/test/NetBeansProjects/WebApplication3/web/billdetails.jsp</file>
+            <file>file:/Users/test/NetBeansProjects/WebApplication3/src/java/Display.java</file>
+            <file>file:/Users/test/NetBeansProjects/WebApplication3/web/bill_history.html</file>
+            <file>file:/Users/test/NetBeansProjects/WebApplication3/web/WEB-INF/web.xml</file>
+            <file>file:/Users/test/NetBeansProjects/WebApplication3/src/java/DBManager.java</file>
+            <file>file:/Users/test/NetBeansProjects/WebApplication3/web/delete.html</file>
+            <file>file:/Users/test/NetBeansProjects/WebApplication3/web/ajax.js</file>
+            <file>file:/Users/test/NetBeansProjects/WebApplication3/src/java/Register.java</file>
+            <file>file:/Users/test/NetBeansProjects/WebApplication3/web/buy.html</file>
             <file>file:/Users/test/NetBeansProjects/WebApplication3/src/java/Validate.java</file>
             <file>file:/Users/test/NetBeansProjects/WebApplication3/web/add.html</file>
-            <file>file:/Users/test/NetBeansProjects/WebApplication3/src/java/Buy.java</file>
         </group>
     </open-files>
 </project-private>

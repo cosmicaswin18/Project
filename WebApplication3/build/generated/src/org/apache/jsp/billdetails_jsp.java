@@ -62,24 +62,27 @@ Class.forName(driver);
 
 } catch (ClassNotFoundException e) {
 e.printStackTrace();
-out.print("haxn"+e);
+//out.print("haxn"+e);
 }
 Connection connection;
 PreparedStatement statement;
 ResultSet resultSet;
 try{
-//int id=Integer.parseInt(request.getParameter("id"));
-int id = 200;
+int id=Integer.parseInt(request.getParameter("id"));
+//int id = 200;
+//String id = request.getParameter("id");
 connection = DriverManager.getConnection(connectionUrl+database, userid, password);
 //Connection connection = DBManager.getConnection();
 statement=connection.prepareStatement("select * from buy where billid=?");
+//statement.setString(1, id);
 statement.setInt(1, id);
 //String sql ="select * from buy where billid=200";
 resultSet = statement.executeQuery();
-out.print("zxcvbnm");
+//out.print("zxcvbnm "+id);
 int i=0;
 while(resultSet.next()){
 out.print(resultSet.getInt("prodid")+" "+resultSet.getString("billid")+" "+resultSet.getString("prodname")+" "+resultSet.getInt("prodqty")+" "+resultSet.getString("prodprice"));
+out.print("<br>");
 i++;
 }
 connection.close();

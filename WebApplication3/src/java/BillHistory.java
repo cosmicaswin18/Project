@@ -14,7 +14,7 @@ public class BillHistory extends HttpServlet {
         int cid = Integer.parseInt(request.getParameter("CUSTID"));
 
         out.println("<html><head>");
-        out.println("<script type=\"text/javascript\" src=\"ajax.js\"></script>");
+        out.println("<script type=\"text/javascript\" src=\"aj.js\"></script>");
         out.println("</head><body>");
         
 
@@ -33,14 +33,17 @@ public class BillHistory extends HttpServlet {
             out.println("<h1>Customer Id: " + cid + "</h1>");
             out.println("<table border=1 width=50% height=50%>");
             out.println("<tr><th>Id</th><th>CustomerName</th><th>BillId</th><th>Price</th><th>Date</th></tr>");
+            //int i=0;
             while (rs.next()) {
                 int id = rs.getInt("id");
                 String name = rs.getString("name");
                 int bid = rs.getInt("bid");
                 float price = rs.getFloat("amt");
                 String date = rs.getString("date");
+                
 
-                out.println("<tr><td>" + id + "</td><td>" + name + "</td><td><button id=\"b\" onclick=\"ajaxFunction()\" >" + bid + "</button></td><td>" + price + "</td><td>" + date + "</td></tr>");
+                out.println("<tr><td>" + id + "</td><td>" + name + "</td><td><button id=\"b\" onclick=\"ajaxFunction(this)\">" + bid + "</button></td><td>" + price + "</td><td>" + date + "</td></tr>");
+               // i++;
             }
             out.println("</table>");
             out.print("<div id=\"ajaxDiv\"></div>");
