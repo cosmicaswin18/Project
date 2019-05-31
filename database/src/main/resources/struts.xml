@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+"http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+
+	<constant name="struts.devMode" value="true" />
+
+	<package name="database" namespace="/" extends="struts-default">
+		<action name="loginaction" class="com.action.LoginAction"
+			method="execute">
+			<result name="success">/loginsuccess.jsp</result>
+			<result name="error">/loginerror.jsp</result>
+		</action>
+		<action name="logout" class="com.action.LoginAction"
+			method="logout">
+			<result name="Logout">/index.jsp</result>
+		</action>
+		<action name="registeraction" class="com.action.RegisterAction">
+			<result name="SUCCESS">/registersuccess.jsp</result>
+			<result name="input">/registererror.jsp</result>
+		</action>
+		<action name="addaction" class="com.action.AddAction">
+			<result name="success">/addsuccess.jsp</result>
+			<result name="error">/error.jsp</result>
+		</action>
+		<action name="deleteaction" class="com.action.DeleteAction">
+			<result name="success">/deletesuccess.jsp</result>
+			<result name="error">/error.jsp</result>
+		</action>
+		<action name="editaction" class="com.action.EditAction">
+			<result name="success">/editsuccess.jsp</result>
+			<result name="error">/error.jsp</result>
+		</action>
+		<action name="displayaction" class="com.action.DisplayAction">
+			<result name="success">/displaysuccess.jsp</result>
+			<result name="error">/error.jsp</result>
+		</action>
+	</package>
+
+</struts>
