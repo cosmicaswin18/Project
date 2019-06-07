@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+"http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+
+	<constant name="struts.devMode" value="true" />
+
+	<package name="LibraryManagementSystem" namespace="/" extends="struts-default">
+		<action name="AdminLogin" class="com.action.AdminLogin"
+			method="execute">
+			<result name="success">/adminsuccess.jsp</result>
+			<result name="error">/adminerror.jsp</result>
+		</action>
+		<action name="logout" class="com.action.AdminLogin"
+			method="logout">
+			<result name="Logout">/index.jsp</result>
+		</action>
+		<action name="LibrarianLogin" class="com.action.LibrarianLogin"
+			method="execute">
+			<result name="success">/librariansuccess.jsp</result>
+			<result name="error">/librarianerror.jsp</result>
+		</action>
+		<action name="LogoutLibrarian" class="com.action.LibrarianLogin"
+			method="logout">
+			<result name="LogoutLib">/index.jsp</result>
+		</action>
+		<action name="AddLibrarian" class="com.action.AddLibrarian"
+			method="execute">
+			<result name="success">/addlibrariansuccess.jsp</result>
+			<!-- <result name="error">/addlibrarianerror.jsp</result> -->
+		</action>
+		<action name="ViewLibrarian" class="com.action.ViewLibrarian"
+			method="execute">
+			<result name="success">/viewlibrariansuccess.jsp</result>
+			<!-- <result name="error">/addlibrarianerror.jsp</result> -->
+		</action>
+		<action name="DeleteLibrarian" class="com.action.DeleteLibrarian"
+			method="execute">
+			<result name="success" type="redirectAction">ViewLibrarian</result>
+			<!-- <result name="error">/addlibrarianerror.jsp</result> -->
+		</action>
+		<action name="EditLibrarian" class="com.action.EditLibrarian"
+			method="execute">
+			<result name="success" type="redirectAction">ViewLibrarian</result>
+			<!-- <result name="error">/addlibrarianerror.jsp</result> -->
+		</action>
+		<action name="AddBook" class="com.action.AddBook"
+			method="execute">
+			<result name="success">/addbooksuccess.jsp</result>
+			<!-- <result name="error">/addlibrarianerror.jsp</result> -->
+		</action>
+		<action name="ViewBook" class="com.action.ViewBook"
+			method="execute">
+			<result name="success">/viewbook.jsp</result>
+			<!-- <result name="error">/addlibrarianerror.jsp</result> -->
+		</action>
+		<action name="DeleteBook" class="com.action.DeleteBook"
+			method="execute">
+			<result name="success" type="redirectAction">ViewBook</result>
+			<!-- <result name="error">/addlibrarianerror.jsp</result> -->
+		</action>
+		<action name="IssueBook" class="com.action.IssueBook"
+			method="execute">
+			<result name="success">/issuebooksuccess.jsp</result>
+			<result name="error">/issuebookerror.jsp</result>
+		</action>
+		<action name="ViewIssuedBook" class="com.action.ViewIssuedBook"
+			method="execute">
+			<result name="success">/viewissuedbook.jsp</result>
+			<!-- <result name="error">/addlibrarianerror.jsp</result> -->
+		</action>
+		<action name="ReturnBook" class="com.action.ReturnBook"
+			method="execute">
+			<result name="success">/returnbooksuccess.jsp</result>
+			<result name="error">/returnbookerror.jsp</result>	
+		</action>
+		</package>
+
+</struts>
