@@ -24,7 +24,7 @@
 			</tr>
 			<s:iterator value="list">
 				<tr>
-					<td><s:property value="callno" /></td>
+					<td><button id="b" onclick="ajaxFunction(this)"><s:property value="callno" /></button></td>
 					<td><s:property value="name" /></td>
 					<td><s:property value="author" /></td>
 					<td><s:property value="publisher" /></td>
@@ -34,5 +34,7 @@
 				</tr>
 			</s:iterator>
 		</table>
+		<div id="ajaxDiv"></div>
 	</div>
+	<script type="text/javascript" src="ajax.js"></script>
 	<jsp:include page="snippets/footer.jsp"></jsp:include>

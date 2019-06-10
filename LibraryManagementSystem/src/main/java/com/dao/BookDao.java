@@ -215,6 +215,32 @@ public class BookDao {
 		return list;
 	}
 	
+	public static List<IssueBookModel> viewIssuedBooksById(String callno) {
+		List<IssueBookModel> list = new ArrayList<IssueBookModel>();
+		try {
+			Connection con = DB.getConnection();
+			PreparedStatement ps = con.prepareStatement("select * from eissuebook where callno=?");
+			ps.setString(1, callno);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				IssueBookModel model = new IssueBookModel();
+				model.setCallno(rs.getString("callno"));
+				model.setStudentid(rs.getString("studentid"));
+				model.setStudentname(rs.getString("studentname"));
+				model.setStudentmobile(rs.getLong("studentmobile"));
+				model.setIssueddate(rs.getDate("issuedate"));
+				model.setReturnstatus(rs.getString("returnstatus"));
+				list.add(model);
+			}
+			con.close();
+
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+
+		return list;
+	}
+	
 	public static BookModel viewByCallno(String callno) {
 		BookModel model = new BookModel();
 		try {
