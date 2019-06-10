@@ -10,9 +10,12 @@ import org.apache.struts2.interceptor.SessionAware;
 
 import com.opensymphony.xwork2.ActionSupport;
 
-@SuppressWarnings("serial")
 public class AdminLogin extends ActionSupport implements SessionAware {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String email;
 	private String password;
 	private SessionMap<String, Object> sessionMap;
@@ -60,11 +63,12 @@ public class AdminLogin extends ActionSupport implements SessionAware {
 	}
 
 	public String logout() {
-			sessionMap.remove("email");
-			System.out.println("asdfgh" + sessionMap);
-			sessionMap.invalidate();
-			sessionMap.clear();
-		System.out.println("qwertyui" + sessionMap);
+		
+		
+		sessionMap.invalidate();
+		sessionMap.remove("email");
+		sessionMap.clear();
+		
 		return "Logout";
 	}
 

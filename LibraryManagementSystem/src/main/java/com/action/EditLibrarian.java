@@ -4,15 +4,18 @@ import com.dao.LibrarianDao;
 import com.model.LibrarianModel;
 import com.opensymphony.xwork2.ActionSupport;
 
-@SuppressWarnings("serial")
 public class EditLibrarian extends ActionSupport {
-	
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int id;
-	private String name,email,password;
+	private String name, email, password;
 	private long mobile;
-	
+
 	public String execute() {
-		LibrarianModel bean=new LibrarianModel(id,name, email, password, mobile);
+		LibrarianModel bean = new LibrarianModel(id, name, email, password, mobile);
 		LibrarianDao.update(bean);
 		return SUCCESS;
 	}
@@ -56,5 +59,5 @@ public class EditLibrarian extends ActionSupport {
 	public void setMobile(long mobile) {
 		this.mobile = mobile;
 	}
-	
+
 }

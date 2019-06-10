@@ -1,19 +1,28 @@
 package com.action;
 
 import com.dao.BookDao;
+import com.dao.CheckDao;
 import com.model.IssueBookModel;
 import com.opensymphony.xwork2.ActionSupport;
 
-@SuppressWarnings("serial")
 public class IssueBook extends ActionSupport {
-	
-	private String callno,studentid,studentname;
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private String callno, studentid, studentname;
 	private long studentmobile;
-	
+
 	public String execute() {
 		IssueBookModel model = new IssueBookModel(callno, studentid, studentname, studentmobile);
+		String smobile = Long.toString(studentmobile);
+		if(!CheckDao.phone(smobile)) {
+			return "merror";
+		}
 		int i = BookDao.issueBook(model);
-		if(i>0) {
+		
+		if (i > 0) {
 			return SUCCESS;
 		} else {
 			return ERROR;
@@ -51,5 +60,5 @@ public class IssueBook extends ActionSupport {
 	public void setStudentmobile(long studentmobile) {
 		this.studentmobile = studentmobile;
 	}
-	
+
 }

@@ -11,9 +11,12 @@ import org.apache.struts2.interceptor.SessionAware;
 import com.dao.LibrarianDao;
 import com.opensymphony.xwork2.ActionSupport;
 
-@SuppressWarnings("serial")
 public class LibrarianLogin extends ActionSupport implements SessionAware {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String email;
 	private String password;
 	private SessionMap<String, Object> sessionMap;
@@ -58,8 +61,9 @@ public class LibrarianLogin extends ActionSupport implements SessionAware {
 	}
 
 	public String logout() {
-		sessionMap.remove("email");
 		sessionMap.invalidate();
+		sessionMap.remove("email");
+		
 		return "LogoutLib";
 	}
 

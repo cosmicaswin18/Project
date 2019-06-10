@@ -3,15 +3,18 @@ package com.action;
 import com.dao.BookDao;
 import com.opensymphony.xwork2.ActionSupport;
 
-@SuppressWarnings("serial")
-public class ReturnBook extends ActionSupport{
-	
+public class ReturnBook extends ActionSupport {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String callno;
 	private String studentid;
-	
+
 	public String execute() {
 		int i = BookDao.returnBook(callno, studentid);
-		if(i>0) { 
+		if (i > 0) {
 			return SUCCESS;
 		} else {
 			return ERROR;
@@ -33,7 +36,5 @@ public class ReturnBook extends ActionSupport{
 	public void setStudentid(String studentid) {
 		this.studentid = studentid;
 	}
-
-	
 
 }

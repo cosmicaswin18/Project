@@ -3,16 +3,16 @@ package com.model;
 import java.sql.Date;
 
 public class IssueBookModel {
-	
-	private String callno,studentid,studentname;
+
+	private String callno, studentid, studentname;
 	private long studentmobile;
 	private Date issueddate;
 	private String returnstatus;
 
 	public IssueBookModel() {
-		
+
 	}
-	
+
 	public IssueBookModel(String callno, String studentid, String studentname, long studentmobile) {
 		super();
 		this.callno = callno;
@@ -68,7 +68,5 @@ public class IssueBookModel {
 	public void setReturnstatus(String returnstatus) {
 		this.returnstatus = returnstatus;
 	}
-	
-	
 
 }

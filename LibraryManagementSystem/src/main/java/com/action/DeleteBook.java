@@ -3,11 +3,14 @@ package com.action;
 import com.dao.BookDao;
 import com.opensymphony.xwork2.ActionSupport;
 
-@SuppressWarnings("serial")
-public class DeleteBook extends ActionSupport{
-	
-String callno;
-	
+public class DeleteBook extends ActionSupport {
+
+	/**
+		 * 
+		 */
+	private static final long serialVersionUID = 1L;
+	private String callno;
+
 	public String execute() {
 		BookDao.delete(callno);
 		return SUCCESS;
@@ -20,6 +23,5 @@ String callno;
 	public void setCallno(String callno) {
 		this.callno = callno;
 	}
-
 
 }

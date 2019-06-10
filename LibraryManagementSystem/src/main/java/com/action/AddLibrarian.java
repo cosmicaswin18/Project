@@ -1,21 +1,29 @@
 package com.action;
 
+import com.dao.CheckDao;
 import com.dao.LibrarianDao;
 import com.model.LibrarianModel;
 import com.opensymphony.xwork2.ActionSupport;
 
-@SuppressWarnings("serial")
 public class AddLibrarian extends ActionSupport {
-	
-	private String name,email,password;
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private String name, email, password;
 	private long mobile;
-	
-	public String execute(){
-		
+
+	public String execute() {
+
 		LibrarianModel model = new LibrarianModel(name, email, password, mobile);
-		if(LibrarianDao.save(model)>0) {
+		String smobile = Long.toString(mobile);
+		if(!CheckDao.phone(smobile)||!CheckDao.em(email)) {
+			return ERROR;
+		}
+		if (LibrarianDao.save(model) > 0) {
 			return SUCCESS;
-		}else {
+		} else {
 			return ERROR;
 		}
 	}
@@ -51,7 +59,5 @@ public class AddLibrarian extends ActionSupport {
 	public void setMobile(long mobile) {
 		this.mobile = mobile;
 	}
-	
-	
 
 }

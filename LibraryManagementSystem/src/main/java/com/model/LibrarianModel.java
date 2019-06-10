@@ -2,11 +2,12 @@ package com.model;
 
 public class LibrarianModel {
 	private int id;
-	private String name,email,password;
+	private String name, email, password;
 	private long mobile;
-	
-	public LibrarianModel() {}
-	
+
+	public LibrarianModel() {
+	}
+
 	public LibrarianModel(int id, String name, String email, String password, long mobile) {
 		super();
 		this.id = id;
@@ -15,7 +16,7 @@ public class LibrarianModel {
 		this.password = password;
 		this.mobile = mobile;
 	}
-	
+
 	public LibrarianModel(String name, String email, String password, long mobile) {
 		super();
 		this.name = name;
@@ -63,7 +64,5 @@ public class LibrarianModel {
 	public void setMobile(long mobile) {
 		this.mobile = mobile;
 	}
-	
-	
 
 }

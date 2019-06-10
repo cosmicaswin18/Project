@@ -4,18 +4,21 @@ import com.dao.BookDao;
 import com.model.BookModel;
 import com.opensymphony.xwork2.ActionSupport;
 
-@SuppressWarnings("serial")
 public class AddBook extends ActionSupport {
-	
-	private String callno,name,author,publisher;
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private String callno, name, author, publisher;
 	private int quantity;
-	
+
 	public String execute() {
-		BookModel model=new BookModel(callno,name,author,publisher,quantity);
-		int i=BookDao.save(model);
-		if(i>0) {
+		BookModel model = new BookModel(callno, name, author, publisher, quantity);
+		int i = BookDao.save(model);
+		if (i > 0) {
 			return SUCCESS;
-		}else {
+		} else {
 			return ERROR;
 		}
 	}
@@ -59,5 +62,5 @@ public class AddBook extends ActionSupport {
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}
-	
+
 }

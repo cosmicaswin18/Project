@@ -1,14 +1,14 @@
 package com.model;
 
 public class BookModel {
-	
-	private String callno,name,author,publisher;
-	private int quantity,issued;
-	
+
+	private String callno, name, author, publisher;
+	private int quantity, issued;
+
 	public BookModel() {
 		super();
 	}
-	
+
 	public BookModel(String callno, String name, String author, String publisher, int quantity) {
 		super();
 		this.callno = callno;
@@ -65,6 +65,5 @@ public class BookModel {
 	public void setIssued(int issued) {
 		this.issued = issued;
 	}
-	
-	
+
 }
