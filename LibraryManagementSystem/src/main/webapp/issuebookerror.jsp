@@ -12,6 +12,6 @@
 	<jsp:include page="snippets/navlibrarian.jsp"></jsp:include>
 	<div class='container'>
 		<h3>Sorry, unable to issue book.</h3>
-		<p>We may have shortage of books. Kindly visit later.</p>
+		<p>We may have shortage of books or you have not returned books. Kindly visit later.</p>
 	</div>
 	<jsp:include page="snippets/footer.jsp"></jsp:include>

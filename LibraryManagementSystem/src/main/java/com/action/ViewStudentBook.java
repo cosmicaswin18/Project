@@ -1,28 +1,32 @@
 package com.action;
 
+import java.util.List;
+
 import com.dao.BookDao;
+import com.model.StudentModel;
 import com.opensymphony.xwork2.ActionSupport;
 
-public class DeleteIssuedBook extends ActionSupport {
+public class ViewStudentBook extends ActionSupport {
 	
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private String callno;
+	List<StudentModel> list = null;
 	private String studentid;
-
+	
 	public String execute() {
-		BookDao.deleteissue(callno,studentid);
+		
+		list = BookDao.viewStudentBooks(studentid);
 		return SUCCESS;
 	}
 
-	public String getCallno() {
-		return callno;
+	public List<StudentModel> getList() {
+		return list;
 	}
 
-	public void setCallno(String callno) {
-		this.callno = callno;
+	public void setList(List<StudentModel> list) {
+		this.list = list;
 	}
 
 	public String getStudentid() {
@@ -32,5 +36,5 @@ public class DeleteIssuedBook extends ActionSupport {
 	public void setStudentid(String studentid) {
 		this.studentid = studentid;
 	}
-	
+
 }

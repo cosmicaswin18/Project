@@ -2,12 +2,15 @@ package com.model;
 
 import java.sql.Date;
 
+
 public class IssueBookModel {
 
 	private String callno, studentid, studentname;
 	private long studentmobile;
 	private Date issueddate;
 	private String returnstatus;
+	private String overdue;
+	private Date returndate;
 
 	public IssueBookModel() {
 
@@ -67,6 +70,22 @@ public class IssueBookModel {
 
 	public void setReturnstatus(String returnstatus) {
 		this.returnstatus = returnstatus;
+	}
+
+	public String getOverdue() {
+		return overdue;
+	}
+
+	public void setOverdue(String overdue) {
+		this.overdue = overdue;
+	}
+
+	public Date getReturndate() {
+		return returndate;
+	}
+
+	public void setReturndate(Date returndate) {
+		this.returndate = returndate;
 	}
 
 }

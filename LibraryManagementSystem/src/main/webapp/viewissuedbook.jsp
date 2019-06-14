@@ -20,6 +20,8 @@
 				<th>Student Mobile</th>
 				<th>Issued Date</th>
 				<th>Return Status</th>
+				<th>Overdue</th>
+				<th>Return Date</th>
 				<th>Delete</th>
 			</tr>
 			<s:iterator value="list">
@@ -30,6 +32,8 @@
 					<td><s:property value="studentmobile" /></td>
 					<td><s:property value="issueddate" /></td>
 					<td><s:property value="returnstatus" /></td>
+					<td><s:property value="overdue" /></td>
+					<td><s:property value="returndate" /></td>
 					<td><a href='deleteissuebook.jsp'>Delete</a></td>
 				</tr>
 			</s:iterator>

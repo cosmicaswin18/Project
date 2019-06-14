@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>View Book</title>
+<title>View Student Book</title>
 <link rel="stylesheet" href="bootstrap.min.css" />
 <link rel="stylesheet" href="nav.css" />
 </head>
@@ -16,25 +16,17 @@
 			<tr>
 				<th>Callno</th>
 				<th>Name</th>
-				<th>Author</th>
-				<th>Publisher</th>
-				<th>Quantity</th>
-				<th>Issued</th>
-				<th>Delete</th>
+				<th>Student Id</th>
+				<th>Return Status</th>
 			</tr>
 			<s:iterator value="list">
 				<tr>
-					<td><button id="b" onmouseenter="ajaxFunction(this)"><s:property value="callno" /></button></td>
+					<td><s:property value="callno" /></td>
 					<td><s:property value="name" /></td>
-					<td><s:property value="author" /></td>
-					<td><s:property value="publisher" /></td>
-					<td><s:property value="quantity" /></td>
-					<td><s:property value="issued" /></td>
-					<td><a href='deletebook.jsp'>Delete</a></td>
+					<td><s:property value="studentid" /></td>
+					<td><s:property value="returnstatus" /></td>
 				</tr>
 			</s:iterator>
 		</table>
-		<div id="ajaxDiv"></div>
 	</div>
-	<script type="text/javascript" src="ajax.js"></script>
 	<jsp:include page="snippets/footer.jsp"></jsp:include>

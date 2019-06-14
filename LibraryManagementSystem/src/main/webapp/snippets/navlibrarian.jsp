@@ -23,6 +23,7 @@
 				<li><a href="issuebookform.jsp">Issue Book</a></li>
 				<li><a href="ViewIssuedBook">View Issued Book</a></li>
 				<li><a href="returnbookform.jsp">Return Book</a></li>
+				<li><a href="viewstudentbookform.jsp">View Student Book</a></li>
 				<li><a href="LogoutLibrarian">Logout</a></li>
 			</ul>
 

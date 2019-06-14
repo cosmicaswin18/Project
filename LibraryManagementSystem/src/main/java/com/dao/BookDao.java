@@ -8,6 +8,7 @@ import java.util.List;
 
 import com.model.BookModel;
 import com.model.IssueBookModel;
+import com.model.StudentModel;
 
 
 public class BookDao {
@@ -75,13 +76,16 @@ public class BookDao {
 		return status;
 	}
 	
-	public static int deleteissue(String callno) {
+	public static int deleteissue(String callno,String studentid) {
 		int status = 0;
 		try {
 			Connection con = DB.getConnection();
 			PreparedStatement ps = con.prepareStatement("delete from eissuebook where callno=? and returnstatus='yes'");
 			ps.setString(1, callno);
 			status = ps.executeUpdate();
+			PreparedStatement ps1 = con.prepareStatement("delete from ecount where studentid=? and count=0");
+			ps1.setString(1, studentid);
+			ps.executeUpdate();
 			con.close();
 
 		} catch (Exception e) {
@@ -132,12 +136,25 @@ public class BookDao {
 	public static int issueBook(IssueBookModel model) {
 		String callno = model.getCallno();
 		boolean checkstatus = checkIssue(callno);
-		System.out.println("Check status: " + checkstatus);
-		if (checkstatus) {
+		String studentid = model.getStudentid();
+		try {
+			Connection con =DB.getConnection();
+			PreparedStatement ps4 = con.prepareStatement("insert into ecount values(?,?)");
+			ps4.setString(1,studentid);
+			ps4.setInt(2,0);
+			ps4.executeUpdate();
+			con.close();
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		
+		boolean checkB = checkBook(studentid);
+		System.out.println("Check status: " + checkstatus + checkB);
+		if (checkstatus && checkB) {
 			int status = 0;
 			try {
 				Connection con = DB.getConnection();
-				PreparedStatement ps = con.prepareStatement("insert into eissuebook values(?,?,?,?,?,?)");
+				PreparedStatement ps = con.prepareStatement("insert into eissuebook values(?,?,?,?,?,?,?,?)");
 				ps.setString(1, model.getCallno());
 				ps.setString(2, model.getStudentid());
 				ps.setString(3, model.getStudentname());
@@ -145,13 +162,28 @@ public class BookDao {
 				java.sql.Date currentDate = new java.sql.Date(System.currentTimeMillis());
 				ps.setDate(5, currentDate);
 				ps.setString(6, "no");
+				ps.setString(7, "no");
+				ps.setDate(8, null);
 
 				status = ps.executeUpdate();
+				
+				PreparedStatement ps4 = con.prepareStatement("update eissuebook set returndate=DATE_ADD(?,INTERVAL 5 DAY) where studentid=? and issuedate=?");
+				ps4.setDate(1,currentDate);
+				ps4.setString(2, studentid);
+				ps4.setDate(3,currentDate);
+				
+				status = ps4.executeUpdate();
+				
 				if (status > 0) {
 					PreparedStatement ps2 = con.prepareStatement("update ebook set issued=? where callno=?");
 					ps2.setInt(1, getIssued(callno) + 1);
 					ps2.setString(2, callno);
 					status = ps2.executeUpdate();
+					
+					PreparedStatement ps3 = con.prepareStatement("update ecount set count=? where studentid=?");
+					ps3.setInt(1, getCount(studentid) + 1);
+					ps3.setString(2, studentid);
+					status = ps3.executeUpdate();
 				}
 				con.close();
 
@@ -180,6 +212,10 @@ public class BookDao {
 				ps2.setInt(1, getIssued(callno) - 1);
 				ps2.setString(2, callno);
 				status = ps2.executeUpdate();
+				PreparedStatement ps3 = con.prepareStatement("update ecount set count=? where studentid=? and count>0");
+				ps3.setInt(1, getCount(studentid) - 1);
+				ps3.setString(2, studentid);
+				status = ps3.executeUpdate();
 			}
 			con.close();
 
@@ -204,6 +240,14 @@ public class BookDao {
 				model.setStudentmobile(rs.getLong("studentmobile"));
 				model.setIssueddate(rs.getDate("issuedate"));
 				model.setReturnstatus(rs.getString("returnstatus"));
+				java.sql.Date currentDate = new java.sql.Date(System.currentTimeMillis());
+				if(currentDate.compareTo(rs.getDate("returndate"))>0) {
+					PreparedStatement ps1 = con.prepareStatement("update eissuebook set overdue='yes' where returnstatus='no' and studentid=?");
+					ps1.setString(1, rs.getString("studentid"));
+					ps1.executeUpdate();
+				}
+				model.setOverdue(rs.getString("overdue"));
+				model.setReturndate(rs.getDate("returndate"));
 				list.add(model);
 			}
 			con.close();
@@ -222,6 +266,7 @@ public class BookDao {
 			PreparedStatement ps = con.prepareStatement("select * from eissuebook where callno=?");
 			ps.setString(1, callno);
 			ResultSet rs = ps.executeQuery();
+			
 			while (rs.next()) {
 				IssueBookModel model = new IssueBookModel();
 				model.setCallno(rs.getString("callno"));
@@ -230,6 +275,8 @@ public class BookDao {
 				model.setStudentmobile(rs.getLong("studentmobile"));
 				model.setIssueddate(rs.getDate("issuedate"));
 				model.setReturnstatus(rs.getString("returnstatus"));
+				model.setOverdue(rs.getString("overdue"));
+				model.setReturndate(rs.getDate("returndate"));
 				list.add(model);
 			}
 			con.close();
@@ -265,4 +312,66 @@ public class BookDao {
 		return model;
 	}
 	
+	public static List<StudentModel> viewStudentBooks(String studentid){
+		List<StudentModel> list = new ArrayList<StudentModel>();
+		try {
+			Connection con = DB.getConnection();
+			PreparedStatement ps = con.prepareStatement(" select * from ebook inner join eissuebook where eissuebook.studentid=? and eissuebook.callno=ebook.callno;");
+			ps.setString(1, studentid);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				StudentModel model = new StudentModel();
+				model.setCallno(rs.getString("ebook.callno"));
+				model.setStudentid(rs.getString("eissuebook.studentid"));
+				model.setName(rs.getString("ebook.name"));
+				model.setReturnstatus(rs.getString("eissuebook.returnstatus"));
+				list.add(model);
+			}
+			con.close();
+
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+
+		return list;
+		
+	}
+	
+	public static int getCount(String studentid) {
+		int count = 0;
+		try {
+			Connection con = DB.getConnection();
+			PreparedStatement ps = con.prepareStatement("select * from ecount where studentid=?");
+			ps.setString(1, studentid);
+			ResultSet rs = ps.executeQuery();
+			if (rs.next()) {
+				count = rs.getInt("count");
+			}
+			con.close();
+
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+
+		return count;
+	}
+	
+	public static boolean checkBook(String studentid) {
+		boolean status = false;
+		try {
+			Connection con = DB.getConnection();
+			PreparedStatement ps = con.prepareStatement("select * from ecount where studentid=? and count<5");
+			ps.setString(1, studentid);
+			ResultSet rs = ps.executeQuery();
+			if (rs.next()) {
+				status = true;
+			}
+			con.close();
+
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+
+		return status;
+	}
 }
