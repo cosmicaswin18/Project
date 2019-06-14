@@ -1,7 +1,6 @@
 package com.dao;
 
 import java.sql.Connection;
-//import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -155,7 +154,7 @@ public class BookDao {
 			int status = 0;
 			try {
 				Connection con = DB.getConnection();
-				PreparedStatement ps = con.prepareStatement("insert into eissuebook values(?,?,?,?,?,?,?)");
+				PreparedStatement ps = con.prepareStatement("insert into eissuebook values(?,?,?,?,?,?,?,?)");
 				ps.setString(1, model.getCallno());
 				ps.setString(2, model.getStudentid());
 				ps.setString(3, model.getStudentname());
@@ -164,8 +163,17 @@ public class BookDao {
 				ps.setDate(5, currentDate);
 				ps.setString(6, "no");
 				ps.setString(7, "no");
+				ps.setDate(8, null);
 
 				status = ps.executeUpdate();
+				
+				PreparedStatement ps4 = con.prepareStatement("update eissuebook set returndate=DATE_ADD(?,INTERVAL 5 DAY) where studentid=? and issuedate=?");
+				ps4.setDate(1,currentDate);
+				ps4.setString(2, studentid);
+				ps4.setDate(3,currentDate);
+				
+				status = ps4.executeUpdate();
+				
 				if (status > 0) {
 					PreparedStatement ps2 = con.prepareStatement("update ebook set issued=? where callno=?");
 					ps2.setInt(1, getIssued(callno) + 1);
@@ -224,16 +232,22 @@ public class BookDao {
 			Connection con = DB.getConnection();
 			PreparedStatement ps = con.prepareStatement("select * from eissuebook order by issuedate desc");
 			ResultSet rs = ps.executeQuery();
-			
 			while (rs.next()) {
 				IssueBookModel model = new IssueBookModel();
 				model.setCallno(rs.getString("callno"));
 				model.setStudentid(rs.getString("studentid"));
 				model.setStudentname(rs.getString("studentname"));
 				model.setStudentmobile(rs.getLong("studentmobile"));
-				model.setIssueddate(rs.getString("issuedate"));
+				model.setIssueddate(rs.getDate("issuedate"));
 				model.setReturnstatus(rs.getString("returnstatus"));
+				java.sql.Date currentDate = new java.sql.Date(System.currentTimeMillis());
+				if(currentDate.compareTo(rs.getDate("returndate"))>0) {
+					PreparedStatement ps1 = con.prepareStatement("update eissuebook set overdue='yes' where returnstatus='no' and studentid=?");
+					ps1.setString(1, rs.getString("studentid"));
+					ps1.executeUpdate();
+				}
 				model.setOverdue(rs.getString("overdue"));
+				model.setReturndate(rs.getDate("returndate"));
 				list.add(model);
 			}
 			con.close();
@@ -252,15 +266,17 @@ public class BookDao {
 			PreparedStatement ps = con.prepareStatement("select * from eissuebook where callno=?");
 			ps.setString(1, callno);
 			ResultSet rs = ps.executeQuery();
+			
 			while (rs.next()) {
 				IssueBookModel model = new IssueBookModel();
 				model.setCallno(rs.getString("callno"));
 				model.setStudentid(rs.getString("studentid"));
 				model.setStudentname(rs.getString("studentname"));
 				model.setStudentmobile(rs.getLong("studentmobile"));
-				model.setIssueddate(rs.getString("issuedate"));
+				model.setIssueddate(rs.getDate("issuedate"));
 				model.setReturnstatus(rs.getString("returnstatus"));
 				model.setOverdue(rs.getString("overdue"));
+				model.setReturndate(rs.getDate("returndate"));
 				list.add(model);
 			}
 			con.close();
@@ -344,7 +360,7 @@ public class BookDao {
 		boolean status = false;
 		try {
 			Connection con = DB.getConnection();
-			PreparedStatement ps = con.prepareStatement("select * from ecount where studentid=? and count<2");
+			PreparedStatement ps = con.prepareStatement("select * from ecount where studentid=? and count<5");
 			ps.setString(1, studentid);
 			ResultSet rs = ps.executeQuery();
 			if (rs.next()) {

@@ -12,7 +12,7 @@
 <body>
 <jsp:include page="snippets/navlibrarian.jsp"></jsp:include>
 	<div class='container'>
-		<h3>Search Book</h3>
+		<h3>View Student Book</h3>
 		<form action="ViewStudentBook" method="post" style="width: 300px">
 			<div class="form-group">
 				<label for="id1">Student Id</label> <input type="text"

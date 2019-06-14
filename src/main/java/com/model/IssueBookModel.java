@@ -1,14 +1,16 @@
 package com.model;
 
-//import java.sql.Date;
+import java.sql.Date;
+
 
 public class IssueBookModel {
 
 	private String callno, studentid, studentname;
 	private long studentmobile;
-	private String issueddate;
+	private Date issueddate;
 	private String returnstatus;
 	private String overdue;
+	private Date returndate;
 
 	public IssueBookModel() {
 
@@ -54,11 +56,11 @@ public class IssueBookModel {
 		this.studentmobile = studentmobile;
 	}
 
-	public String getIssueddate() {
+	public Date getIssueddate() {
 		return issueddate;
 	}
 
-	public void setIssueddate(String issueddate) {
+	public void setIssueddate(Date issueddate) {
 		this.issueddate = issueddate;
 	}
 
@@ -76,6 +78,14 @@ public class IssueBookModel {
 
 	public void setOverdue(String overdue) {
 		this.overdue = overdue;
+	}
+
+	public Date getReturndate() {
+		return returndate;
+	}
+
+	public void setReturndate(Date returndate) {
+		this.returndate = returndate;
 	}
 
 }
